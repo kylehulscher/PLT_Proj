@@ -12,7 +12,8 @@ def loadDBCSV():
 	with open('data-broker.csv', newline='') as csvfile:
 		csvReader = csv.reader(csvfile, delimiter=',')
 		for row in csvReader:
-			siteList.append(row[2])
+			if row[2] != "Website URL":
+				siteList.append(row[2])
 	return siteList
 
 def findDNSMPI(s):
@@ -21,7 +22,6 @@ def findDNSMPI(s):
 
 def pageSearchBS(urls):
 	headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0"}
-	#urls = ["http://www.oracle.com"]
 	trueURL = []
 	falseURL = []
 	errorURL = []
@@ -49,10 +49,19 @@ def pageSearchBS(urls):
 	print("True: " + str(trueURL), end='\n\n\n')
 	print("False: " + str(falseURL), end='\n\n\n')
 	print("Error: " + str(errorURL), end='\n\n\n')
+	
+	bsout = ""
+	for i in range(len(trueURL) - 2):
+		bsout += str(trueURL[i]) + ","
+	bsout += str(trueURL[len(trueURL) - 1]) + "\n"
+	for i in range(len(falseURL) - 2):
+		bsout += str(falseURL[i]) + ","
+	bsout += str(falseURL[len(falseURL) - 1]) + "\n"
+	for i in range(len(errorURL) - 2):
+		bsout += str(errorURL[i]) + ","
+	bsout += str(errorURL[len(errorURL) - 1]) + "\n"
 	with open('bsOut.txt', 'w') as f:
-		f.write("True: " + str(trueURL) + "\n\n\n" +
-	  			"False: " + str(falseURL) + "\n\n\n" +
-				"Error: " + str(errorURL))
+		f.write(bsout)
 	return falseURL + errorURL
 
 def pageSearchSel(urls):
@@ -86,10 +95,20 @@ def pageSearchSel(urls):
 	print("True: " + str(trueURL), end='\n\n\n')
 	print("False: " + str(falseURL), end='\n\n\n')
 	print("Error: " + str(errorURL), end='\n\n\n')
+
+	selout = ""
+	for i in range(len(trueURL) - 2):
+		selout += str(trueURL[i]) + ","
+	selout += str(trueURL[len(trueURL) - 1]) + "\n"
+	for i in range(len(falseURL) - 2):
+		selout += str(falseURL[i]) + ","
+	selout += str(falseURL[len(falseURL) - 1]) + "\n"
+	for i in range(len(errorURL) - 2):
+		selout += str(errorURL[i]) + ","
+	selout += str(errorURL[len(errorURL) - 1]) + "\n"
 	with open('selOut.txt', 'w') as f:
-		f.write("True: " + str(trueURL) + "\n\n\n" +
-	  			"False: " + str(falseURL) + "\n\n\n" +
-				"Error: " + str(errorURL))
+		f.write(selout)
+
 	driver.quit()
 
 if __name__ == "__main__":
