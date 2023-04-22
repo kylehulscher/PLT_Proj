@@ -17,7 +17,7 @@ def loadDBCSV():
 	return siteList
 
 def findDNSMPI(s):
-	if "do not sell" in s.lower():
+	if "do not sell my personal information" in s.lower():
 		 return s
 
 def pageSearchBS(urls):
