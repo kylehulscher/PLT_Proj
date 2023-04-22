@@ -9,7 +9,7 @@ import csv
 
 def loadDBCSV():
 	siteList = []
-	with open('data-broker.csv', newline='') as csvfile:
+	with open('data-broker.csv', newline='',encoding = "utf8") as csvfile:
 		csvReader = csv.reader(csvfile, delimiter=',')
 		for row in csvReader:
 			if row[2] != "Website URL":
