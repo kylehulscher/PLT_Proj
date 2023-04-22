@@ -8,7 +8,7 @@ def loadURL(checkExisting):
     if checkExisting:
         # Read URLs from output_gpt.csv if it exists
         try:
-            with open('output_gpt.csv', 'r') as file:
+            with open('output_gpt.csv', 'r', encoding = "utf8") as file:
                 reader = csv.reader(file)
                 for row in reader:
                     # Skip headers row
@@ -21,7 +21,7 @@ def loadURL(checkExisting):
             pass
     if not checkExisting or fnf:
         # Read URLs from data-broker.csv
-        with open('data-broker.csv', 'r') as file:
+        with open('data-broker.csv', 'r', encoding = "utf8") as file:
             reader = csv.reader(file)
             for row in reader:
                 urls.append(row[2])
@@ -34,7 +34,7 @@ def checkDNSMPI(urls):
     driver.set_page_load_timeout(10)
 
     # Create CSV file and write headers
-    with open('output_gpt2.csv', 'w', newline='') as file:
+    with open('output_gpt2.csv', 'w', newline='', encoding = "utf8") as file:
         writer = csv.writer(file)
         writer.writerow(['url', 'font_size', 'bg_color', 'fg_color', 'element_text', 'html_tag_type', 'link_url'])
         numTrue = 0
