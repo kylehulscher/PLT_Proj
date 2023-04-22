@@ -65,7 +65,9 @@ def pageSearchBS(urls):
 	return falseURL + errorURL
 
 def pageSearchSel(urls):
-	driver = webdriver.Chrome()
+	options = webdriver.ChromeOptions()
+	options.add_experimental_option('excludeSwitches', ['enable-logging']) 
+	driver = webdriver.Chrome(options=options)
 	trueURL = []
 	falseURL = []
 	errorURL = []

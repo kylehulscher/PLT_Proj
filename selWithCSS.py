@@ -30,8 +30,12 @@ def loadURL(checkExisting):
 
 def checkDNSMPI(urls):
     # Initialize WebDriver
-    driver = webdriver.Chrome()
+    # Options allows us to suppress USB log messages
+    options = webdriver.ChromeOptions()
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    driver = webdriver.Chrome(options=options)
     driver.set_page_load_timeout(10)
+    
 
     # Create CSV file and write headers
     with open('output_gpt2.csv', 'w', newline='', encoding = "utf8") as file:
