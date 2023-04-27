@@ -16,6 +16,16 @@ def loadDBCSV():
 				siteList.append(row[2])
 	return siteList
 
+def loadDBCSVShort():
+	siteList = []
+	with open('data-broker-SHORT.csv', newline='',encoding = "utf8") as csvfile:
+		csvReader = csv.reader(csvfile, delimiter=',')
+		for row in csvReader:
+			if row[2] != "Website URL":
+				siteList.append(row[2])
+	return siteList
+	
+
 def findDNSMPI(s):
 	if "do not sell my personal information" in s.lower():
 		 return s
@@ -114,6 +124,7 @@ def pageSearchSel(urls):
 	driver.quit()
 
 if __name__ == "__main__":
-	sl = loadDBCSV()
+	#sl = loadDBCSV()
+	sl = loadDBCSVShort()
 	rejects = pageSearchBS(sl)
 	pageSearchSel(rejects)
